@@ -1,0 +1,174 @@
+import { FC, useEffect, useState } from "react";
+
+enum Step {
+  Start,
+  PickDate,
+  SelectHour,
+}
+
+export const ScheduleProccessScreen = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [step, setStep] = useState(0);
+  const nextStep = () => setStep((prev) => ++prev);
+  const prevStep = () => setStep((prev) => --prev);
+  // Function to handle date change
+  const handleDateChange = (event: any) => {
+    setSelectedDate(event.target.value);
+    nextStep();
+  };
+  const goToFirstStep = () => setStep(Step.Start);
+
+  const renderStep = () => {
+    switch (step) {
+      case Step.Start:
+        return <FirstStep nextStep={nextStep} />;
+      case Step.PickDate:
+        return <DatePicker handleDateChange={handleDateChange} />;
+      case Step.SelectHour:
+        return (
+          <DisplayHours
+            back={prevStep}
+            selectedDate={selectedDate}
+            handleScheduleLesson={goToFirstStep}
+          />
+        );
+      default:
+        goToFirstStep();
+        break;
+    }
+  };
+
+  return <>{renderStep()}</>;
+};
+
+const FirstStep: FC<{ nextStep: () => void }> = ({ nextStep }) => {
+  return (
+    <>
+      <p>Select your preferred lesson</p>
+      <button style={buttonStyle} onClick={nextStep}>
+        Schedule
+      </button>
+    </>
+  );
+};
+
+const DatePicker: FC<{
+  handleDateChange: (e: any) => void;
+}> = ({ handleDateChange }) => {
+  const [selectedDate, setSelectedDate] = useState("");
+  // List of disabled dates
+
+  const disabledDates = ["2024-03-11", "2024-03-15", "2024-03-25"];
+  const isDayFullyBooked = (day: string) => disabledDates.includes(day);
+
+  const handleSelectedDate = (e: any) => {
+    const day = e.target.value;
+    if (isDayFullyBooked(day)) {
+      setSelectedDate((prev) => e.target.value);
+      return;
+    }
+    handleDateChange(e);
+  };
+
+  return (
+    <div style={layoutWrapper}>
+      <div>
+        <label htmlFor="date">Select a Date: </label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={selectedDate}
+          onChange={handleSelectedDate}
+          min={new Date().toISOString().split("T")[0]}
+          max="2024-03-31"
+        />
+      </div>
+      {isDayFullyBooked(selectedDate) && <FullyBookedDay />}
+    </div>
+  );
+};
+
+const DisplayHours: FC<{
+  selectedDate: string;
+  handleScheduleLesson: () => void;
+  back: () => void;
+}> = ({ selectedDate, handleScheduleLesson, back }) => {
+  const [hours, setHours] = useState<Array<string>>([]);
+  const [selectedHour, setSelectedHour] = useState("");
+
+  useEffect(() => {
+    setHours(getHours(selectedDate));
+    return () => {
+      setHours([]);
+    };
+  }, [selectedDate]);
+
+  const handleClick = ({ target: { value } }: any) => {
+    setSelectedHour(value);
+  };
+
+  if (!hours.length) return <></>;
+
+  return (
+    <div style={layoutWrapper}>
+      <div>
+        <div style={{ textAlign: "start" }} onClick={back}>
+          Back
+        </div>
+        Select Hour:{" "}
+        <select onChange={handleClick}>
+          {hours.map((h) => (
+            <option key={h}>{h}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        Time: <span>{selectedHour}</span>
+      </div>
+      {selectedHour && (
+        <button style={buttonStyle} onClick={handleScheduleLesson}>
+          Schedule
+        </button>
+      )}
+    </div>
+  );
+};
+
+const FullyBookedDay = () => {
+  return (
+    <>
+      <p>
+        Unfortunately this date was fully booked.
+        <br /> Please choose another date.
+      </p>
+    </>
+  );
+};
+
+const buttonStyle = {
+  padding: "1rem 2rem",
+  borderRadius: "4px",
+  cursor: "pointer",
+};
+
+const layoutWrapper: any = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "space-between",
+  gap: "1rem",
+};
+
+const getHours = (day: any) => {
+  var result = []; // Results will go here
+  var selectedDayHours = new Date(day).getHours(); // Get current hour of the day
+
+  // Loop from current hour number to 23
+  for (var i = selectedDayHours; i < 24; i++) {
+    result.push(i + ":00"); // Put loop counter into array with "00" next to it
+  }
+
+  console.log(result); // show results
+
+  return result;
+};

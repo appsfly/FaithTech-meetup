@@ -10,6 +10,12 @@
     "@types/node": "^16.18.87",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
+    "@zoomus/websdk": "^2.18.3",
+    "axios": "^1.6.8",
+    "bower": "^1.8.14",
+    "install": "^0.13.0",
+    "jsrsasign": "^11.1.0",
+    "jsrsasign-util": "^1.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -39,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jsrsasign": "^10.5.13"
   }
 }
