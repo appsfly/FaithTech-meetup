@@ -7,11 +7,11 @@ interface Meeting {
   time: string;
 }
 const meetings: Array<Meeting> = [
-  { day: "Thu", time: "14:00" },
-  { day: "Fri", time: "15:00" },
+  { day: "Sat", time: "14:00" },
+  { day: "Sat", time: "17:00" },
   { day: "Sat", time: "22:00" },
   { day: "Sun", time: "12:00" },
-  { day: "Fri", time: "00:00" },
+  { day: "Thu", time: "14:00" },
   { day: "Fri", time: "19:00" },
 ];
 
