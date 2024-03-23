@@ -10,6 +10,7 @@ const meetings: Array<Meeting> = [
   { day: "Sat", time: "14:00" },
   { day: "Sat", time: "15:00" },
   { day: "Sat", time: "17:00" },
+  { day: "Sat", time: "18:00" },
   { day: "Sat", time: "22:00" },
   { day: "Sun", time: "12:00" },
   { day: "Thu", time: "14:00" },
