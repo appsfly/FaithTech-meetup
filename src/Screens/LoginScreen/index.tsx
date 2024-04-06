@@ -3,7 +3,7 @@ import { FormEvent, useContext, useState } from "react";
 
 import { Button, Box, TextField } from "@mui/material";
 
-import "./styles.css";
+// import "./styles.css";
 import { UserContext } from "../../Contexts/User.context";
 import { q, usersCollection } from "./mock";
 
@@ -11,7 +11,15 @@ const defaultValue = {
   username: false,
   password: false,
 };
+const wrapper = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "3rem",
 
+  alignItems: "center",
+  justifyContent: "center",
+  color: "black",
+} as any;
 export const LoginScreen = () => {
   const { user, login } = useContext(UserContext);
   const [hasError, setHasError] = useState(defaultValue);
@@ -48,7 +56,7 @@ export const LoginScreen = () => {
   const i = Math.floor(Math.random() * q.length);
 
   return (
-    <div className='wrapper'>
+    <div style={wrapper}>
       Welcome!
       <q style={{ width: "50vw" }}>{q[i % q.length]}</q>
       <Box
