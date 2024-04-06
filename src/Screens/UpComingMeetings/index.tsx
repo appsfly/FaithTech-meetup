@@ -6,16 +6,53 @@ interface Meeting {
   day: string;
   time: string;
 }
-const meetings: Array<Meeting> = [
-  { day: "Sat", time: "14:00" },
-  { day: "Sat", time: "15:00" },
-  { day: "Sat", time: "17:00" },
-  { day: "Sat", time: "18:00" },
-  { day: "Sat", time: "22:00" },
-  { day: "Sun", time: "12:00" },
-  { day: "Thu", time: "14:00" },
-  { day: "Fri", time: "19:00" },
-];
+
+export const UpComingMeetings = () => {
+  const meetings = getTodayLessons();
+  return (
+    <>
+      <div className='tabcontent'>
+        <div>
+          {meetings.map(({ day, time }, key) => (
+            <div
+              key={key}
+              style={{
+                ...meeetingStyle({ day, time }),
+              }}
+            >
+              <div>
+                {day}, {time}
+              </div>
+
+              <div>
+                <span onClick={handleJoin({ day, time })}>Join</span> |{" "}
+                <span>Copy Link</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const getTodayLessons = () => {
+  let today = new Date();
+
+  // Set the start time to 10 AM
+  today.setHours(10, 0, 0, 0);
+
+  // today in string
+  const day = formatDayToCustom(today);
+
+  // Calculate the number of lessons from 10 AM to 10 PM (12 hours)
+  const lessons = Array.from({ length: 12 }).map((_, i) => ({
+    day,
+    time: `${today.getHours() + i}:00`,
+  }));
+
+  return lessons;
+};
 
 function formatDayToCustom(date: Date) {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -74,7 +111,7 @@ const meeetingStyle = (meeting: Meeting) => {
     flexWrap: "wrap",
     padding: "1rem",
     minWidth: "30vw",
-
+    color: MeetingColor.Ready,
     cursor: "pointer",
     border: "1px solid",
   };
@@ -82,34 +119,7 @@ const meeetingStyle = (meeting: Meeting) => {
 
   return {
     ...baseStyle,
+    opacity: "0.1",
     color: MeetingColor.NotTime,
   };
-};
-
-export const UpComingMeetings = () => {
-  return (
-    <>
-      <div id="Paris" className="tabcontent">
-        <div>
-          {meetings.map(({ day, time }, key) => (
-            <div
-              key={key}
-              style={{
-                ...meeetingStyle({ day, time }),
-              }}
-            >
-              <div>
-                {day}, {time}
-              </div>
-
-              <div>
-                <span onClick={handleJoin({ day, time })}>Join</span> |{" "}
-                <span>Copy Link</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
 };

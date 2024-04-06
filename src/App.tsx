@@ -1,6 +1,9 @@
+import React, { useContext } from "react";
 import "./App.css";
+import { LoginScreen } from "./Screens/LoginScreen";
 import { Meetings } from "./Screens/Meetings";
 import { ScheduleProccessScreen } from "./Screens/ScheduleProccess";
+import { UserContext, UserProvider } from "./Contexts/User.context";
 
 const BASE_URL = "";
 const ACCESS_TOKEN = "user_access_token"; // OAuth access token
@@ -16,11 +19,23 @@ const meetingDetails = {
   timezone: "America/New_York", // Timezone of the meeting
 };
 
+const ScreensWrapper = (Screen: any) => {
+  return <div className='screens-style'>{<Screen />}</div>;
+};
 function App() {
+  const { user } = useContext(UserContext);
+
+  const Screen = ScreensWrapper(Meetings);
   return (
-    <div className="App">
-      <header className="App-header">
-        <Meetings />
+    <div className='App'>
+      <header className='App-header'>
+        <div>
+          {user ? Screen : <LoginScreen />}
+
+          {/* <h1>React User Authentication Example</h1> */}
+
+          {/* <Logout /> */}
+        </div>
       </header>
     </div>
   );
