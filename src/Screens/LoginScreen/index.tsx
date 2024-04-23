@@ -5,7 +5,8 @@ import { Button, Box, TextField } from "@mui/material";
 
 // import "./styles.css";
 import { UserContext } from "../../Contexts/User.context";
-import { q, usersCollection } from "./mock";
+import { q } from "./mock";
+import { Endpoints, getItemById } from "../../api/api";
 
 const defaultValue = {
   username: false,
@@ -30,7 +31,7 @@ export const LoginScreen = () => {
   const setErrorIndicator = (field: string) =>
     setHasError((prev) => ({ ...prev, [field]: true }));
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { target } = event;
     const formData = new FormData(target as any);
@@ -44,14 +45,19 @@ export const LoginScreen = () => {
       setErrorIndicator("password");
       return;
     }
-
-    usersCollection.forEach((user) => {
-      if (user.username === formProps.username) {
-        setHasError(defaultValue);
-        login({ firstName: formProps.username as any });
+    try {
+      const user = await getItemById(Endpoints.User, formProps.username);
+      if (!user) {
+        setErrorIndicator("username");
+        setErrorIndicator("password");
         return;
       }
-    });
+
+      login(user);
+    } catch (err) {
+      setErrorIndicator("username");
+      setErrorIndicator("password");
+    }
   };
   const i = Math.floor(Math.random() * q.length);
 

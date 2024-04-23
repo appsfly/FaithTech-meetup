@@ -1,14 +1,35 @@
+import { useContext, useEffect, useState } from "react";
+import { Endpoints, getItemById } from "../../api/api";
+import { UserContext } from "../../Contexts/User.context";
+
 enum MeetingColor {
-  Ready = "white",
+  Ready = "black",
   NotTime = "grey",
 }
+
 interface Meeting {
   day: string;
   time: string;
 }
-
+const getMeetings = async (userId: string) => {
+  return getItemById(Endpoints.Meeting, userId);
+};
 export const UpComingMeetings = () => {
-  const meetings = getTodayLessons();
+  const { user } = useContext(UserContext);
+  const [meetings, setMeetings] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    if (!user?._id) return;
+
+    (async () => {
+      const res = await getMeetings(user?._id);
+      const meetings = [...res].map(({ day, time }) =>
+        getTodayLessons(day, time)
+      );
+      setMeetings(meetings);
+    })();
+  }, []);
+
   return (
     <>
       <div className='tabcontent'>
@@ -36,20 +57,19 @@ export const UpComingMeetings = () => {
   );
 };
 
-const getTodayLessons = () => {
-  let today = new Date();
+const getTodayLessons = (d: string, t: string) => {
+  let today = new Date(d);
 
-  // Set the start time to 10 AM
-  today.setHours(10, 0, 0, 0);
+  // // Set the start time to 10 AM
+  // today.setHours(10, 0, 0, 0);
 
   // today in string
   const day = formatDayToCustom(today);
 
-  // Calculate the number of lessons from 10 AM to 10 PM (12 hours)
-  const lessons = Array.from({ length: 12 }).map((_, i) => ({
+  const lessons = {
     day,
-    time: `${today.getHours() + i}:00`,
-  }));
+    time: t,
+  };
 
   return lessons;
 };

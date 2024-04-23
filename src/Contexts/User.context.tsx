@@ -19,6 +19,7 @@ interface UserProviderInterface {
 
 // Define IUserProvider interface
 interface IUserProvider {
+  _id: string;
   firstName: string;
 }
 

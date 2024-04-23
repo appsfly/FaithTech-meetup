@@ -1,4 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
+import { createItem, Endpoints } from "../../api/api";
+import { UserContext } from "../../Contexts/User.context";
+import { useNavigate } from "react-router-dom";
 
 enum Step {
   Start,
@@ -7,6 +10,8 @@ enum Step {
 }
 
 export const ScheduleProccessScreen = () => {
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("");
   const [step, setStep] = useState(0);
   const nextStep = () => setStep((prev) => ++prev);
@@ -17,7 +22,16 @@ export const ScheduleProccessScreen = () => {
     nextStep();
   };
   const goToFirstStep = () => setStep(Step.Start);
-
+  const handleScheduleLesson = (time: any) => {
+    // create meeting
+    createItem(Endpoints.Meeting, {
+      time,
+      day: selectedDate,
+      user_id: user?._id,
+    });
+    // go back to screen
+    navigate("/");
+  };
   const renderStep = () => {
     switch (step) {
       case Step.Start:
@@ -29,7 +43,7 @@ export const ScheduleProccessScreen = () => {
           <DisplayHours
             back={prevStep}
             selectedDate={selectedDate}
-            handleScheduleLesson={goToFirstStep}
+            handleScheduleLesson={handleScheduleLesson}
           />
         );
       default:
@@ -38,12 +52,19 @@ export const ScheduleProccessScreen = () => {
     }
   };
 
-  return <>{renderStep()}</>;
+  return <div>{renderStep()}</div>;
 };
 
 const FirstStep: FC<{ nextStep: () => void }> = ({ nextStep }) => {
+  const navigate = useNavigate();
   return (
     <>
+      <div
+        style={{ textAlign: "start", cursor: "pointer", marginBottom: "5rem" }}
+        onClick={() => navigate("/")}
+      >
+        X
+      </div>
       <p>Select your preferred lesson</p>
       <button style={buttonStyle} onClick={nextStep}>
         Schedule
@@ -73,15 +94,14 @@ const DatePicker: FC<{
   return (
     <div style={layoutWrapper}>
       <div>
-        <label htmlFor="date">Select a Date: </label>
+        <label htmlFor='date'>Select a Date: </label>
         <input
-          type="date"
-          id="date"
-          name="date"
+          type='date'
+          id='date'
+          name='date'
           value={selectedDate}
           onChange={handleSelectedDate}
           min={new Date().toISOString().split("T")[0]}
-          max="2024-03-31"
         />
       </div>
       {isDayFullyBooked(selectedDate) && <FullyBookedDay />}
@@ -91,7 +111,7 @@ const DatePicker: FC<{
 
 const DisplayHours: FC<{
   selectedDate: string;
-  handleScheduleLesson: () => void;
+  handleScheduleLesson: (time: any) => void;
   back: () => void;
 }> = ({ selectedDate, handleScheduleLesson, back }) => {
   const [hours, setHours] = useState<Array<string>>([]);
@@ -113,7 +133,7 @@ const DisplayHours: FC<{
   return (
     <div style={layoutWrapper}>
       <div>
-        <div style={{ textAlign: "start" }} onClick={back}>
+        <div style={{ textAlign: "start", cursor: "pointer" }} onClick={back}>
           Back
         </div>
         Select Hour:{" "}
@@ -123,11 +143,16 @@ const DisplayHours: FC<{
           ))}
         </select>
       </div>
-      <div>
-        Time: <span>{selectedHour}</span>
-      </div>
       {selectedHour && (
-        <button style={buttonStyle} onClick={handleScheduleLesson}>
+        <div>
+          Time: <span>{selectedHour}</span>
+        </div>
+      )}
+      {selectedHour && (
+        <button
+          style={buttonStyle}
+          onClick={() => handleScheduleLesson(selectedHour)}
+        >
           Schedule
         </button>
       )}
@@ -167,8 +192,6 @@ const getHours = (day: any) => {
   for (var i = selectedDayHours; i < 24; i++) {
     result.push(i + ":00"); // Put loop counter into array with "00" next to it
   }
-
-  console.log(result); // show results
 
   return result;
 };

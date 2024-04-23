@@ -5,6 +5,11 @@ import "./styles.css";
 import { KJUR } from "jsrsasign";
 import { Recordings } from "../Recordings";
 import { UpComingMeetings } from "../UpComingMeetings";
+import * as React from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 enum Screens {
   Meetings = "Meetings",
@@ -12,32 +17,46 @@ enum Screens {
 }
 
 export const Meetings = () => {
+  const navigate = useNavigate();
   const [screen, setScreen] = useState(Screens.Meetings);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: Screens) => {
+    setScreen(newValue);
+  };
+  const handleNewLessonClick = () => {
+    navigate("/new");
+  };
 
   return (
     <>
-      <div className="tab" style={{ marginBottom: "2rem" }}>
-        <button
-          className="tablinks"
-          onClick={() => setScreen(Screens.Meetings)}
+      <div className='tab' style={{ marginBottom: "2rem" }}>
+        {Screens.Meetings === screen && (
+          <Button
+            variant='contained'
+            className='newMeetingBtn'
+            onClick={handleNewLessonClick}
+          >
+            New Lesson
+          </Button>
+        )}
+        <Tabs
+          value={screen}
+          onChange={handleChange}
+          textColor='primary'
+          indicatorColor='primary'
+          aria-label='secondary tabs example'
         >
-          Meetings
-        </button>
-        <button
-          className="tablinks"
-          onClick={() => setScreen(Screens.Recordings)}
-        >
-          Recordings
-        </button>
-      </div>
+          <Tab value={Screens.Recordings} label='Recordings' />
+          <Tab value={Screens.Meetings} label='Meetings' />
+        </Tabs>
 
-      {/* <!-- Tab content --> */}
-      {
         {
-          [Screens.Recordings]: <Recordings />,
-          [Screens.Meetings]: <UpComingMeetings />,
-        }[screen]
-      }
+          {
+            [Screens.Recordings]: <Recordings />,
+            [Screens.Meetings]: <UpComingMeetings />,
+          }[screen]
+        }
+      </div>
     </>
   );
 };

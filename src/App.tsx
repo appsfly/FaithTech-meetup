@@ -3,7 +3,8 @@ import "./App.css";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { Meetings } from "./Screens/Meetings";
 import { ScheduleProccessScreen } from "./Screens/ScheduleProccess";
-import { UserContext, UserProvider } from "./Contexts/User.context";
+import { UserContext } from "./Contexts/User.context";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const BASE_URL = "";
 const ACCESS_TOKEN = "user_access_token"; // OAuth access token
@@ -25,12 +26,11 @@ const ScreensWrapper = (Screen: any) => {
 function App() {
   const { user } = useContext(UserContext);
 
-  const Screen = ScreensWrapper(Meetings);
   return (
     <div className='App'>
       <header className='App-header'>
         <div>
-          {user ? Screen : <LoginScreen />}
+          {user ? <ScreensRouts /> : <LoginScreen />}
 
           {/* <h1>React User Authentication Example</h1> */}
 
@@ -42,3 +42,17 @@ function App() {
 }
 
 export default App;
+
+const ScreensRouts = () => {
+  // const MeetingsScreen = ScreensWrapper(Meetings);
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path='/' element={<ScreensWrapper />}> */}
+        <Route index element={<Meetings />} />
+        <Route path='/new' element={<ScheduleProccessScreen />} />
+        {/* </Route> */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
