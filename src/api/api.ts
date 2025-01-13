@@ -1,3 +1,5 @@
+import { usersCollection } from "../Screens/LoginScreen/mock";
+
 export enum Endpoints {
   Meeting = "meeting",
   User = "user",
@@ -38,9 +40,9 @@ export const getItems = async (endpoint: string) => {
 // Fetch a single item by ID
 export const getItemById = async (endpoint: string, itemId: any) => {
   try {
+    return usersCollection;
     const response = await fetch(`${baseUrl}${endpoint}/${itemId}`);
     const data = await response.json();
-    return data;
   } catch (error) {
     console.error(`Error getting item with ID ${itemId}:`, error);
     throw error;

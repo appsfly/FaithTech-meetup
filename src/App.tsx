@@ -29,13 +29,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <div>
-          {user ? <ScreensRouts /> : <LoginScreen />}
-
-          {/* <h1>React User Authentication Example</h1> */}
-
-          {/* <Logout /> */}
-        </div>
+        {user ? <ScreensRouts /> : <LoginScreen />}
       </header>
     </div>
   );

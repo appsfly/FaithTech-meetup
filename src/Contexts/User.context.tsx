@@ -18,9 +18,11 @@ interface UserProviderInterface {
 }
 
 // Define IUserProvider interface
-interface IUserProvider {
-  _id: string;
-  firstName: string;
+export interface IUserProvider {
+  _id?: string;
+  username?: string;
+  firstName?: string;
+  password?: string;
 }
 
 // Create provider component

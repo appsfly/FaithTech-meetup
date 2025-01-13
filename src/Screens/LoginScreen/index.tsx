@@ -13,6 +13,7 @@ const defaultValue = {
   password: false,
 };
 const wrapper = {
+  height: "100vh",
   display: "flex",
   flexDirection: "column",
   gap: "3rem",
@@ -46,13 +47,16 @@ export const LoginScreen = () => {
       return;
     }
     try {
-      const user = await getItemById(Endpoints.User, formProps.username);
-      if (!user) {
+      const users = await getItemById(Endpoints.User, formProps.username);
+      if (!users.length) {
         setErrorIndicator("username");
         setErrorIndicator("password");
         return;
       }
-
+      const user = users.filter(
+        (user) => user.username === formProps.username
+      )[0];
+      console.log({ user });
       login(user);
     } catch (err) {
       setErrorIndicator("username");
@@ -74,8 +78,6 @@ export const LoginScreen = () => {
         noValidate
         autoComplete='off'
       >
-        {/* <form action="submit" > */}
-
         <div className='group'>
           <TextField
             autoFocus

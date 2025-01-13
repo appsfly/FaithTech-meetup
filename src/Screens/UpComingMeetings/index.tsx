@@ -11,121 +11,136 @@ interface Meeting {
   day: string;
   time: string;
 }
-const getMeetings = async (userId: string) => {
-  return getItemById(Endpoints.Meeting, userId);
+
+const useMockData = true; // Set this to false when the endpoint is ready
+
+const getMeetings = async (userId: string = "") => {
+  if (useMockData) {
+    // Simulating a delay to mimic an API call
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Mock data
+    return [
+      { day: "Mon", time: "09:30" },
+      { day: "Tue", time: "11:00" },
+      { day: "Wed", time: "14:30" },
+      { day: "Thu", time: "10:00" },
+      { day: "Fri", time: "16:00" },
+      { day: "Sat", time: "15:00" },
+    ];
+  }
+  return [];
+  // // Real API call
+  // return getItemById(Endpoints.Meeting, userId);
 };
+
 export const UpComingMeetings = () => {
   const { user } = useContext(UserContext);
-  const [meetings, setMeetings] = useState<Array<any>>([]);
+  const [meetings, setMeetings] = useState<Array<Meeting>>([]);
 
   useEffect(() => {
-    if (!user?._id) return;
-
     (async () => {
-      const res = await getMeetings(user?._id);
-      const meetings = [...res].map(({ day, time }) =>
+      const res: Array<Meeting> = await getMeetings();
+
+      // Filter out past meetings
+      const filteredMeetings = res.filter(({ day, time }) =>
+        isMeetingInFuture(day, time)
+      );
+
+      const formattedMeetings = filteredMeetings.map(({ day, time }) =>
         getTodayLessons(day, time)
       );
-      setMeetings(meetings);
+      setMeetings(formattedMeetings);
     })();
-  }, []);
+  }, [user?._id]);
 
   return (
-    <>
-      <div className='tabcontent'>
-        <div>
-          {meetings.map(({ day, time }, key) => (
-            <div
-              key={key}
-              style={{
-                ...meeetingStyle({ day, time }),
-              }}
-            >
-              <div>
-                {day}, {time}
-              </div>
+    <div className='tabcontent'>
+      <div>
+        {meetings
+          .filter(({ time }) => {
+            const [hours, minutes] = time.split(":").map(Number);
+            const meetingTime = new Date();
+            meetingTime.setHours(hours, minutes, 0, 0);
 
+            return meetingTime.getTime() >= new Date().getTime();
+          })
+          .map(({ day, time }, index) => (
+            <div
+              key={`${day}-${time}-${index}`}
+              style={meetingStyle({ day, time })}
+            >
+              <div>{time}</div>
               <div>
-                <span onClick={handleJoin({ day, time })}>Join</span> |{" "}
+                <span onClick={() => handleJoin({ day, time })}>Join</span> |{" "}
                 <span>Copy Link</span>
               </div>
             </div>
           ))}
-        </div>
       </div>
-    </>
+    </div>
   );
 };
 
-const getTodayLessons = (d: string, t: string) => {
-  let today = new Date(d);
-
-  // // Set the start time to 10 AM
-  // today.setHours(10, 0, 0, 0);
-
-  // today in string
-  const day = formatDayToCustom(today);
-
-  const lessons = {
-    day,
+const getTodayLessons = (d: string, t: string): Meeting => {
+  const today = new Date(d);
+  return {
+    day: formatDayToCustom(today),
     time: t,
   };
-
-  return lessons;
 };
 
-function formatDayToCustom(date: Date) {
+function formatDayToCustom(date: Date): string {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const dayIndex = date.getDay();
-  const day = days[dayIndex];
-
-  return day;
+  return days[date.getDay()];
 }
 
 const handleJoin = (meeting: Meeting) => () => {
-  if (!isCurrentTimeMeetingTime(meeting)) {
-    // window.location.reload();
-    return;
-  }
+  if (!isCurrentTimeMeetingTime(meeting)) return;
 
   const LINK =
     "https://us05web.zoom.us/j/6740291247?pwd=K7dQgvGE6DUTt7nlhLT3stoVdmxLgZ.1";
   window.open(LINK)?.focus();
 };
 
-/**  Calculate if the current time is within 80 minutes before the end of the hour */
-const isWithinMinutesBeforeEndOfHourRage = (time: any): boolean => {
+const isWithinMinutesBeforeEndOfHourRange = (time: string): boolean => {
   const now = new Date();
-  const meetingTime = new Date();
-  const [hours, minutes] = time.split(":");
-  meetingTime.setHours(parseInt(hours));
-  meetingTime.setMinutes(parseInt(minutes));
+  const [hours, minutes] = time.split(":").map(Number);
+  const meetingTime = new Date(now);
+  meetingTime.setHours(hours, minutes, 0, 0);
 
-  // Calculate the time 10 minutes before the meeting
-  const tenMinutesBeforeMeeting = new Date(meetingTime);
-  tenMinutesBeforeMeeting.setMinutes(meetingTime.getMinutes() - 10);
+  const startRange = new Date(meetingTime);
+  startRange.setMinutes(meetingTime.getMinutes() - 10);
 
-  // Calculate the time 60 minutes after the meeting
-  const sixtyMinutesAfterMeeting = new Date(meetingTime);
-  sixtyMinutesAfterMeeting.setMinutes(meetingTime.getMinutes() + 60);
+  const endRange = new Date(meetingTime);
+  endRange.setMinutes(meetingTime.getMinutes() + 60);
 
-  // Check if the current time is within the specified range
-  const isInRange =
-    now >= tenMinutesBeforeMeeting && now <= sixtyMinutesAfterMeeting;
-  return isInRange;
+  return now >= startRange && now <= endRange;
 };
 
 const isCurrentTimeMeetingTime = ({ day, time }: Meeting): boolean => {
   const now = new Date();
-
-  // Example usage:
-  const currentDay = formatDayToCustom(now);
-
-  return currentDay === day && isWithinMinutesBeforeEndOfHourRage(time);
+  return (
+    formatDayToCustom(now) === day && isWithinMinutesBeforeEndOfHourRange(time)
+  );
 };
 
-const meeetingStyle = (meeting: Meeting) => {
-  const baseStyle: any = {
+const isMeetingInFuture = (day: string, time: string): boolean => {
+  const now = new Date();
+  const meetingDay = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(
+    day
+  );
+
+  const [hours, minutes] = time.split(":").map(Number);
+  const meetingDate = new Date();
+  meetingDate.setDate(now.getDate() + ((meetingDay - now.getDay() + 7) % 7));
+  meetingDate.setHours(hours, minutes, 0, 0);
+
+  return meetingDate >= now;
+};
+
+const meetingStyle = (meeting: Meeting): any => {
+  const baseStyle = {
     display: "flex",
     justifyContent: "space-between",
     flexWrap: "wrap",
@@ -135,11 +150,7 @@ const meeetingStyle = (meeting: Meeting) => {
     cursor: "pointer",
     border: "1px solid",
   };
-  if (isCurrentTimeMeetingTime(meeting)) return baseStyle;
-
-  return {
-    ...baseStyle,
-    opacity: "0.1",
-    color: MeetingColor.NotTime,
-  };
+  return isCurrentTimeMeetingTime(meeting)
+    ? baseStyle
+    : { ...baseStyle, opacity: "0.5", color: MeetingColor.NotTime };
 };

@@ -10,6 +10,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { ProgressCard } from "../../Component/Progress/ProgressCard";
 
 enum Screens {
   Meetings = "Meetings",
@@ -28,8 +29,15 @@ export const Meetings = () => {
   };
 
   return (
-    <>
-      <div className='tab' style={{ marginBottom: "2rem" }}>
+    <MainScreeenWrapper>
+      <div
+        className='tab'
+        style={{
+          margin: "2rem 0",
+          height: "20vh",
+          justifySelf: "flex-end",
+        }}
+      >
         {Screens.Meetings === screen && (
           <Button
             variant='contained'
@@ -57,10 +65,43 @@ export const Meetings = () => {
           }[screen]
         }
       </div>
-    </>
+      <ProgressScection />
+    </MainScreeenWrapper>
   );
 };
 
+const ProgressScection = () => {
+  return (
+    <div className='bottom-section'>
+      {/* <ProgressCard /> */}
+      <ProgressCard
+        title='HTML'
+        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
+        progressPercent={30}
+      />
+      <ProgressCard
+        title='CSS'
+        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
+        progressPercent={70}
+      />
+      <ProgressCard
+        title='JavaScript'
+        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
+        progressPercent={70}
+      />
+      <ProgressCard
+        title='Project Development'
+        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
+        progressPercent={20}
+      />
+    </div>
+  );
+};
+const MainScreeenWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  return <div className='mainWrapper'>{children}</div>;
+};
 // https://www.npmjs.com/package/jsrsasign
 
 // function generateSignature(

@@ -1,8 +1,10 @@
+import { IUserProvider } from "../../Contexts/User.context";
+
 export const q = [
   "The details are not the details. They make the design.",
   "The Web as I envisaged it, we have not seen it yet. The future is still so much bigger than the past.",
 ];
-export const usersCollection = [
+export const usersCollection: Array<IUserProvider> = [
   {
     username: "gideon@gmail.com",
     password: "123456",
