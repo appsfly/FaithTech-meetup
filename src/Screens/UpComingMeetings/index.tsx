@@ -21,7 +21,7 @@ const getMeetings = async (userId: string = "") => {
 
     // Mock data
     return [
-      { day: "Mon", time: "09:30" },
+      { day: "Mon", time: "18:50" },
       { day: "Tue", time: "11:00" },
       { day: "Wed", time: "14:30" },
       { day: "Thu", time: "10:00" },
@@ -50,6 +50,7 @@ export const UpComingMeetings = () => {
       const formattedMeetings = filteredMeetings.map(({ day, time }) =>
         getTodayLessons(day, time)
       );
+      console.log({ formattedMeetings });
       setMeetings(formattedMeetings);
     })();
   }, [user?._id]);
@@ -83,7 +84,9 @@ export const UpComingMeetings = () => {
 };
 
 const getTodayLessons = (d: string, t: string): Meeting => {
+  console.log({ d });
   const today = new Date(d);
+
   return {
     day: formatDayToCustom(today),
     time: t,
@@ -120,6 +123,7 @@ const isWithinMinutesBeforeEndOfHourRange = (time: string): boolean => {
 
 const isCurrentTimeMeetingTime = ({ day, time }: Meeting): boolean => {
   const now = new Date();
+
   return (
     formatDayToCustom(now) === day && isWithinMinutesBeforeEndOfHourRange(time)
   );
@@ -150,7 +154,10 @@ const meetingStyle = (meeting: Meeting): any => {
     cursor: "pointer",
     border: "1px solid",
   };
-  return isCurrentTimeMeetingTime(meeting)
+  console.log({ meeting });
+  const itis = isCurrentTimeMeetingTime(meeting);
+
+  return itis
     ? baseStyle
     : { ...baseStyle, opacity: "0.5", color: MeetingColor.NotTime };
 };

@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
+import { IUser } from "../types/User";
 
 // Define the default value type explicitly
 const defaultValue: UserProviderInterface = {
@@ -18,7 +19,7 @@ interface UserProviderInterface {
 }
 
 // Define IUserProvider interface
-export interface IUserProvider {
+export interface IUserProvider extends IUser {
   _id?: string;
   username?: string;
   firstName?: string;

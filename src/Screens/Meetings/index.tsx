@@ -40,6 +40,7 @@ export const Meetings = () => {
       >
         {Screens.Meetings === screen && (
           <Button
+            disabled
             variant='contained'
             className='newMeetingBtn'
             onClick={handleNewLessonClick}
@@ -73,26 +74,25 @@ export const Meetings = () => {
 const ProgressScection = () => {
   return (
     <div className='bottom-section'>
-      {/* <ProgressCard /> */}
       <ProgressCard
         title='HTML'
-        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
-        progressPercent={30}
+        description='keep going...'
+        progressPercent={10}
       />
       <ProgressCard
         title='CSS'
-        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
-        progressPercent={70}
+        description='keep going...'
+        progressPercent={10}
       />
       <ProgressCard
         title='JavaScript'
-        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
-        progressPercent={70}
+        description='keep going...'
+        progressPercent={10}
       />
       <ProgressCard
         title='Project Development'
-        description='Youre ahead of pace and should reach your goal 30%  ahead of schedule'
-        progressPercent={20}
+        description='keep going...'
+        progressPercent={10}
       />
     </div>
   );

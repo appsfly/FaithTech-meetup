@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { Meetings } from "./Screens/Meetings";
 import { ScheduleProccessScreen } from "./Screens/ScheduleProccess";
 import { UserContext } from "./Contexts/User.context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminHeader from "./Component/AdminHeader";
+import AddStudent from "./Component/AddStudent";
+import StudentList from "./Component/StudentList";
+import UsersDashboard from "./Component/UsersDashboard";
 
 const BASE_URL = "";
 const ACCESS_TOKEN = "user_access_token"; // OAuth access token
@@ -23,18 +27,34 @@ const meetingDetails = {
 const ScreensWrapper = (Screen: any) => {
   return <div className='screens-style'>{<Screen />}</div>;
 };
+
 function App() {
   const { user } = useContext(UserContext);
-
   return (
     <div className='App'>
       <header className='App-header'>
-        {user ? <ScreensRouts /> : <LoginScreen />}
+        {!user ? (
+          <LoginScreen />
+        ) : user?.role == "admin" ? (
+          <DashboardRouts />
+        ) : (
+          <ScreensRouts />
+        )}
       </header>
     </div>
   );
 }
 
+const AppHeader = () => {
+  const { user } = useContext(UserContext);
+  if (!user || user.role !== "admin") return <></>;
+
+  return (
+    <React.Fragment>
+      <AdminHeader />
+    </React.Fragment>
+  );
+};
 export default App;
 
 const ScreensRouts = () => {
@@ -48,5 +68,24 @@ const ScreensRouts = () => {
         {/* </Route> */}
       </Routes>
     </BrowserRouter>
+  );
+};
+
+const DashboardRouts = () => {
+  // const MeetingsScreen = ScreensWrapper(Meetings);
+  return (
+    <>
+      <BrowserRouter>
+        <AppHeader />
+        <Routes>
+          {/* <Route path='/' element={<ScreensWrapper />}> */}
+          <Route index element={<Meetings />} />
+          <Route path='/new' element={<ScheduleProccessScreen />} />
+          <Route path='/users' element={<UsersDashboard />} />
+
+          {/* </Route> */}
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };

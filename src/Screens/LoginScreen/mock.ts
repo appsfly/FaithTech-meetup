@@ -8,6 +8,7 @@ export const usersCollection: Array<IUserProvider> = [
   {
     username: "gideon@gmail.com",
     password: "123456",
+    role: "admin",
   },
   {
     username: "0537621336",

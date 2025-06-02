@@ -6,7 +6,7 @@ import { Button, Box, TextField } from "@mui/material";
 // import "./styles.css";
 import { UserContext } from "../../Contexts/User.context";
 import { q } from "./mock";
-import { Endpoints, getItemById } from "../../api/api";
+import { Endpoints, fetchUserByEmail, getItemById } from "../../api/api";
 
 const defaultValue = {
   username: false,
@@ -31,32 +31,43 @@ export const LoginScreen = () => {
 
   const setErrorIndicator = (field: string) =>
     setHasError((prev) => ({ ...prev, [field]: true }));
+  const tryLogin = async (email: string) => {
+    const user = await fetchUserByEmail(email);
+    if (!user) {
+      alert("No user found with this email!");
+      return;
+    }
 
+    // Proceed — user exists
+    console.log("Welcome,", user.name);
+    return user;
+  };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { target } = event;
     const formData = new FormData(target as any);
-    const formProps = Object.fromEntries(formData);
+    const formProps: any = Object.fromEntries(formData);
 
     if (!formProps.username) {
       setErrorIndicator("username");
       return;
     }
-    if (!formProps.password) {
-      setErrorIndicator("password");
-      return;
-    }
+    // if (!formProps.password) {
+    //   setErrorIndicator("password");
+    //   return;
+    // }
     try {
-      const users = await getItemById(Endpoints.User, formProps.username);
-      if (!users.length) {
-        setErrorIndicator("username");
-        setErrorIndicator("password");
-        return;
-      }
-      const user = users.filter(
-        (user) => user.username === formProps.username
-      )[0];
-      console.log({ user });
+      const user = await tryLogin(formProps.username);
+      if (!user) return;
+      // if (!users.length) {
+      //   setErrorIndicator("username");
+      //   setErrorIndicator("password");
+      //   return;
+      // }
+      // const user = users.filter(
+      //   (user) => user.username === formProps.username
+      // )[0];
+      // console.log({ user });
       login(user);
     } catch (err) {
       setErrorIndicator("username");
@@ -91,7 +102,7 @@ export const LoginScreen = () => {
             variant='standard'
           />
         </div>
-        <div className='group'>
+        {/* <div className='group'>
           <TextField
             error={isPasswordError}
             id='standard-password-input'
@@ -101,7 +112,7 @@ export const LoginScreen = () => {
             autoComplete='current-password'
             variant='standard'
           />
-        </div>
+        </div> */}
         <div className='group'>
           <Button variant='contained' type='submit'>
             SignIn
