@@ -11,9 +11,17 @@ export interface IStudentDetails {
   email: string;
   phone?: string;
   progress: {
-    html: { status: LessonStatus; progress: number };
-    css: { status: LessonStatus; progress: number };
-    js: { status: LessonStatus; progress: number };
+    html: {
+      status: LessonStatus;
+      progress: number;
+      completedTopics: Array<any>;
+    };
+    css: {
+      status: LessonStatus;
+      progress: number;
+      completedTopics: Array<any>;
+    };
+    js: { status: LessonStatus; progress: number; completedTopics: Array<any> };
   };
   attendance: {
     lessonName: string;

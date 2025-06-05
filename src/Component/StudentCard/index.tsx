@@ -66,7 +66,6 @@ const StatusBox = styled.div<{ status: LessonStatus }>`
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const StudentCard: React.FC<Props> = ({ student, onClick }) => {
-  console.log(student);
   return (
     <Card onClick={() => onClick(student.id)}>
       <Name>{student.name}</Name>
@@ -75,7 +74,8 @@ const StudentCard: React.FC<Props> = ({ student, onClick }) => {
         const progress = student.progress[key as keyof Student["progress"]];
         return (
           <StatusBox key={key} status={progress.status}>
-            <strong>{capitalize(key)}</strong>: {progress.progress}%
+            <strong>{capitalize(key)}</strong>:{" "}
+            {progress.completedTopics.length * 10}%
           </StatusBox>
         );
       })}

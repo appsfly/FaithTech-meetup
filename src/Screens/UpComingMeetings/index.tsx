@@ -50,7 +50,6 @@ export const UpComingMeetings = () => {
       const formattedMeetings = filteredMeetings.map(({ day, time }) =>
         getTodayLessons(day, time)
       );
-      console.log({ formattedMeetings });
       setMeetings(formattedMeetings);
     })();
   }, [user?._id]);
@@ -84,7 +83,6 @@ export const UpComingMeetings = () => {
 };
 
 const getTodayLessons = (d: string, t: string): Meeting => {
-  console.log({ d });
   const today = new Date(d);
 
   return {
@@ -154,7 +152,6 @@ const meetingStyle = (meeting: Meeting): any => {
     cursor: "pointer",
     border: "1px solid",
   };
-  console.log({ meeting });
   const itis = isCurrentTimeMeetingTime(meeting);
 
   return itis

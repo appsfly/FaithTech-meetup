@@ -5,6 +5,7 @@ import { IUser } from "../types/User";
 const defaultValue: UserProviderInterface = {
   user: null,
   login: () => {},
+  updateUser: (user: IUser) => {},
   logout: () => {},
 };
 
@@ -14,6 +15,7 @@ export const UserContext = createContext<UserProviderInterface>(defaultValue);
 // Define UserProviderInterface
 interface UserProviderInterface {
   user: IUserProvider | null;
+  updateUser: (user: IUser) => void;
   login: (user: IUserProvider | null) => void;
   logout: () => void;
 }
@@ -43,11 +45,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     setUser(null);
   };
 
+  const updateUser = (user: IUser) => {
+    setUser((prevUser) => ({ ...prevUser, ...user }));
+  };
+
   // Value to be provided by context
   const contextValue: UserProviderInterface = {
     user,
     login,
     logout,
+    updateUser,
   };
 
   return (

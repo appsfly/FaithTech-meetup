@@ -39,7 +39,7 @@ export const LoginScreen = () => {
     }
 
     // Proceed — user exists
-    console.log("Welcome,", user.name);
+
     return user;
   };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

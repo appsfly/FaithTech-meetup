@@ -11,6 +11,8 @@ import Tab from "@mui/material/Tab";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ProgressCard } from "../../Component/Progress/ProgressCard";
+import { UserContext } from "../../Contexts/User.context";
+import { fetchUserByEmail } from "../../api/api";
 
 enum Screens {
   Meetings = "Meetings",
@@ -72,28 +74,62 @@ export const Meetings = () => {
 };
 
 const ProgressScection = () => {
+  const { user, updateUser } = React.useContext(UserContext);
+  useEffect(() => {
+    (async () => {
+      if (!user?.email) return;
+
+      const _user = await fetchUserByEmail(user?.email!);
+      if (!_user) {
+        alert("No user found with this email!");
+        return;
+      }
+
+      // Proceed — user exists
+      updateUser(_user);
+    })();
+  }, []);
+  function getClearStatus(course: string) {
+    if (
+      user?.progress![course] &&
+      user?.progress![course]?.completedTopics.length
+    ) {
+      return user?.progress![course].status;
+    }
+    return "not-started";
+  }
   return (
     <div className='bottom-section'>
       <ProgressCard
         title='HTML'
-        description='keep going...'
-        progressPercent={10}
+        description={getClearStatus("html")}
+        progressPercent={user?.progress!["html"].completedTopics.length * 10}
       />
       <ProgressCard
         title='CSS'
-        description='keep going...'
-        progressPercent={10}
+        description={getClearStatus("css")}
+        progressPercent={user?.progress!["css"].completedTopics.length * 10}
       />
       <ProgressCard
-        title='JavaScript'
-        description='keep going...'
-        progressPercent={10}
+        title='JS'
+        description={getClearStatus("js")}
+        progressPercent={user?.progress!["js"].completedTopics.length * 10}
       />
       <ProgressCard
         title='Project Development'
-        description='keep going...'
-        progressPercent={10}
+        description={getClearStatus("project development")}
+        progressPercent={
+          (user?.progress!["project development"]?.completedTopics?.length ||
+            0) * 10
+        }
       />
+      {/* <ProgressCard
+        title='Development'
+        description='keep going...'
+        progressPercent={
+          user.user?.progress!["css"].completedTopics.length * 10
+        }
+      /> */}
     </div>
   );
 };

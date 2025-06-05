@@ -2,7 +2,7 @@ import { IStudentDetails } from "../Component/StudentDetails";
 
 export interface IUser {
   _id?: string;
-  username?: string;
+  name?: string;
   firstName?: string;
   password?: string; // Optional for frontend use, but never store plaintext passwords here
   lastName?: string;
@@ -10,7 +10,7 @@ export interface IUser {
   role?: "student" | "mentor" | "admin";
   createdAt?: string;
   updatedAt?: string;
-  progress?: number; // optional: you might want to track it per user
+  progress?: Record<string, any>; // optional: you might want to track it per user
 }
 
 export type Student = Omit<IStudentDetails, "onBack">;
