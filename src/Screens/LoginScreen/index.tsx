@@ -16,7 +16,7 @@ const wrapper = {
   height: "100vh",
   display: "flex",
   flexDirection: "column",
-  gap: "3rem",
+  padding: 10,
 
   alignItems: "center",
   justifyContent: "center",

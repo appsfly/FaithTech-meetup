@@ -74,3 +74,27 @@
 
   overflow-y: auto;
 }
+
+
+@media screen and (max-width: 769px){
+  .mainWrapper { 
+    height: fit-content;
+  }
+
+  .bottom-section { 
+    width: fit-content;
+    padding: 0 20px;
+    flex-direction: column;
+  }
+
+  .tab { 
+        height: 55vh !important;
+  }
+
+}
+
+@media screen and (max-width: 480px){
+    .tab >:first-child { 
+    display: none;
+  }
+ }
