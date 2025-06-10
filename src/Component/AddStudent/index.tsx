@@ -23,6 +23,7 @@ export default function AddStudent() {
         html: { status: "not-started", progress: 0, completedTopics: [] },
         css: { status: "not-started", progress: 0, completedTopics: [] },
         js: { status: "not-started", progress: 0, completedTopics: [] },
+        tasks: { status: "not-started", progress: 0, completedTopics: [] },
       },
       attendance: [
         { lessonName: "מבוא ל-HTML", attended: false, needsReview: false },

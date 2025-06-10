@@ -5,6 +5,7 @@ import AddStudent from "../AddStudent";
 import { collection, onSnapshot } from "firebase/firestore";
 import { Student } from "../../types/User";
 import { db } from "../../config/firebase";
+import { UserProfile } from "../../Screens/UserProfile";
 
 // const students: Array<Omit<IStudentDetails, "onBack">> = [
 //   {
@@ -80,7 +81,7 @@ export default function UsersDashboard() {
         ...(doc.data() as Student),
         id: doc.id,
       }));
-      setStudents(data);
+      setStudents(data.filter((student: any) => student.role !== "admin"));
     });
 
     return () => unsubscribe();
@@ -90,12 +91,14 @@ export default function UsersDashboard() {
     () => students.find((s) => s.id === selectedId),
     [selectedId]
   );
-
   return (
     <div>
       {!selectedId ? (
         <>
           <AddStudent />
+          <div style={{ textAlign: "start", paddingLeft: "2.5rem" }}>
+            Count: {students.length}
+          </div>
           <div
             style={{
               display: "grid",

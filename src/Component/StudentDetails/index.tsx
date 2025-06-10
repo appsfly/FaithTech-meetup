@@ -4,24 +4,21 @@ import React from "react";
 import styled from "styled-components";
 
 type LessonStatus = "not-started" | "in-progress" | "completed";
-
+interface Topic {
+  status: LessonStatus;
+  progress: number;
+  completedTopics: Array<any>;
+}
 export interface IStudentDetails {
   id: string;
   name: string;
   email: string;
   phone?: string;
   progress: {
-    html: {
-      status: LessonStatus;
-      progress: number;
-      completedTopics: Array<any>;
-    };
-    css: {
-      status: LessonStatus;
-      progress: number;
-      completedTopics: Array<any>;
-    };
-    js: { status: LessonStatus; progress: number; completedTopics: Array<any> };
+    html: Topic;
+    css: Topic;
+    js: Topic;
+    tasks: Topic;
   };
   attendance: {
     lessonName: string;
@@ -65,15 +62,8 @@ const Note = styled.li`
   border-radius: 4px;
 `;
 
-const StudentDetails: React.FC<IStudentDetails> = ({
-  id,
-  name,
-  email,
-  progress,
-  attendance,
-  notes,
-  onBack,
-}) => {
+const StudentDetails: React.FC<IStudentDetails> = (props) => {
+  const { id, name, email, progress, attendance, notes, onBack } = props;
   return (
     <Container>
       <Header>

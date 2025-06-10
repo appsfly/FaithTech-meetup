@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Student } from "../../types/User";
+import { UserProfile } from "../../Screens/UserProfile";
+import { H2 } from "../Atoms/h2";
+import { P } from "../Atoms/P";
 
 type LessonStatus = "not-started" | "in-progress" | "completed";
 
@@ -33,18 +36,6 @@ const Card = styled.div`
   }
 `;
 
-const Name = styled.h2`
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-`;
-
-const Email = styled.p`
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 12px;
-`;
-
 const StatusBox = styled.div<{ status: LessonStatus }>`
   padding: 8px;
   border-radius: 8px;
@@ -67,19 +58,30 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const StudentCard: React.FC<Props> = ({ student, onClick }) => {
   return (
-    <Card onClick={() => onClick(student.id)}>
-      <Name>{student.name}</Name>
-      <Email>{student.email}</Email>
-      {["html", "css", "js"].map((key) => {
-        const progress = student.progress[key as keyof Student["progress"]];
-        return (
-          <StatusBox key={key} status={progress.status}>
-            <strong>{capitalize(key)}</strong>:{" "}
-            {progress.completedTopics.length * 10}%
-          </StatusBox>
-        );
-      })}
-    </Card>
+    <UserProfile key={student.id} handleClick={() => onClick(student.id)}>
+      <UserProfile.HeaderSection>
+        <H2>{student.name}</H2>
+        <P>{student.email}</P>
+      </UserProfile.HeaderSection>
+      <UserProfile.NotesSection>
+        <ul>
+          {Array.from({ length: 3 }).map(() => (
+            <li>I Need help with html</li>
+          ))}
+        </ul>
+      </UserProfile.NotesSection>
+      <UserProfile.BottomSection>
+        {["html", "css", "js"].map((key) => {
+          const progress = student.progress[key as keyof Student["progress"]];
+          return (
+            <StatusBox key={key} status={progress.status}>
+              <strong>{capitalize(key)}</strong>:{" "}
+              {progress.completedTopics.length * 10}%
+            </StatusBox>
+          );
+        })}
+      </UserProfile.BottomSection>
+    </UserProfile>
   );
 };
 
