@@ -13,7 +13,10 @@ export const ProjectsScreen = () => {
   return (
     <Wrapper>
       {selectedTask !== null ? (
-        <ProjectDetail id={selectedTask} />
+        <ProjectDetail
+          id={selectedTask}
+          backClick={() => setSelectedTask(null)}
+        />
       ) : (
         projects.map(({ name, description, icon, difficulty }, index) => (
           <CardWrapper onClick={handleSetSelectedTaskId(index)}>
