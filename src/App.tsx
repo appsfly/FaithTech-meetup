@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { Meetings } from "./Screens/Meetings";
@@ -9,9 +9,9 @@ import AdminHeader from "./Component/AdminHeader";
 
 import UsersDashboard from "./Component/UsersDashboard";
 import CourseTopicsScreen from "./Screens/CourseTopicsScreen";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import { db } from "./config/firebase";
 import Header from "./Component/StudentHeader";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ProjectsScreen } from "./Screens/Projects";
 
 const BASE_URL = "";
 const ACCESS_TOKEN = "user_access_token"; // OAuth access token
@@ -31,21 +31,26 @@ const ScreensWrapper = (Screen: any) => {
   return <div className='screens-style'>{<Screen />}</div>;
 };
 
+// Create a client
+const queryClient = new QueryClient();
+
 function App() {
   const { user } = useContext(UserContext);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        {!user ? (
-          <LoginScreen />
-        ) : user?.role == "admin" ? (
-          <DashboardRouts />
-        ) : (
-          <ScreensRouts />
-        )}
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className='App'>
+        <header className='App-header'>
+          {!user ? (
+            <LoginScreen />
+          ) : user?.role == "admin" ? (
+            <DashboardRouts />
+          ) : (
+            <ScreensRouts />
+          )}
+        </header>
+      </div>
+    </QueryClientProvider>
   );
 }
 
@@ -85,9 +90,11 @@ const DashboardRouts = () => {
       <BrowserRouter>
         <AppHeader />
         <Routes>
+          {/* <Route index element={<ReactQuryExample />} /> */}
           <Route index element={<Meetings />} />
           <Route path='/new' element={<ScheduleProccessScreen />} />
           <Route path='/users' element={<UsersDashboard />} />
+          <Route path='/projects' element={<ProjectsScreen />} />
           <Route path='/course/:courseName' element={<CourseTopicsScreen />} />
         </Routes>
       </BrowserRouter>

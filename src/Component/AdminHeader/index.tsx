@@ -22,6 +22,7 @@ export default function AdminHeader() {
       <LinksWrapper>
         <Link to='users'>Users</Link>
         <Link to='/'>Main</Link>
+        <Link to='/projects'>Projects</Link>
       </LinksWrapper>
     </HeaderContainer>
   );
