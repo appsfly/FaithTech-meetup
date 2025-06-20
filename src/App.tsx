@@ -77,6 +77,7 @@ const ScreensRouts = () => {
       <Routes>
         <Route index element={<Meetings />} />
         <Route path='/new' element={<ScheduleProccessScreen />} />
+        <Route path='/projects' element={<ProjectsScreen />} />
         <Route path='/course/:courseName' element={<CourseTopicsScreen />} />
       </Routes>
     </BrowserRouter>

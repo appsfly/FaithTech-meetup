@@ -64,11 +64,11 @@ const StudentCard: React.FC<Props> = ({ student, onClick }) => {
         <P>{student.email}</P>
       </UserProfile.HeaderSection>
       <UserProfile.NotesSection>
-        <ul>
+        {/* <ul>
           {Array.from({ length: 3 }).map(() => (
             <li>I Need help with html</li>
           ))}
-        </ul>
+        </ul> */}
       </UserProfile.NotesSection>
       <UserProfile.BottomSection>
         {["html", "css", "js"].map((key) => {

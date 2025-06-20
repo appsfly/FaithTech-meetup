@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../Contexts/User.context";
 
@@ -76,25 +76,30 @@ export default function Header({ title }: { title: string }) {
       {location.pathname !== "/" ? (
         backDisplay
       ) : (
-        <div
-          onClick={logout}
-          style={{ display: "flex", alignItems: "center", gap: 10 }}
-        >
-          <LogoutIcon
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-            strokeWidth={2}
+        <>
+          <div
+            onClick={logout}
+            style={{ display: "flex", alignItems: "center", gap: 10 }}
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1'
-            />
-          </LogoutIcon>
-          <Title>logout</Title>
-        </div>
+            <LogoutIcon
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1'
+              />
+            </LogoutIcon>
+            <Title>logout</Title>
+          </div>
+          <div style={{ margin: "0 auto" }}>
+            <Link to='/projects'>Projects</Link>
+          </div>
+        </>
       )}
     </HeaderWrapper>
   );
