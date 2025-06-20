@@ -63,13 +63,7 @@ const StudentCard: React.FC<Props> = ({ student, onClick }) => {
         <H2>{student.name}</H2>
         <P>{student.email}</P>
       </UserProfile.HeaderSection>
-      <UserProfile.NotesSection>
-        {/* <ul>
-          {Array.from({ length: 3 }).map(() => (
-            <li>I Need help with html</li>
-          ))}
-        </ul> */}
-      </UserProfile.NotesSection>
+
       <UserProfile.BottomSection>
         {["html", "css", "js"].map((key) => {
           const progress = student.progress[key as keyof Student["progress"]];
