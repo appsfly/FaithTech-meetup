@@ -19,11 +19,18 @@
    ```bash
    git clone https://github.com/appsfly/FaithTech-meetup.git
 
-2. התקן חבילות:
 
+2. התקן חבילות:
+   ```bash
 cd FaithTech-meetup
 npm install
+
+
+   ```bash
+npm start
+
 3. הפעל את השרת:
 
 
-npm start
+
+
