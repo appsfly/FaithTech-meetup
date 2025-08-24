@@ -17,4 +17,4 @@
 
 1. שכפל את המאגר:
    ```bash
-   git clone https://github.com/username/FaithTech-meetup.git
+   git clone https://github.com/appsfly/FaithTech-meetup.git
