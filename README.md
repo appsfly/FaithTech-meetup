@@ -18,3 +18,12 @@
 1. שכפל את המאגר:
    ```bash
    git clone https://github.com/appsfly/FaithTech-meetup.git
+
+2. התקן חבילות:
+
+cd FaithTech-meetup
+npm install
+3. הפעל את השרת:
+
+
+npm start
