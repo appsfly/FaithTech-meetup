@@ -23,13 +23,13 @@
 2. התקן חבילות:
 
    ```bash
-cd FaithTech-meetup
-npm install
+   cd FaithTech-meetup
+   npm install
 
 3. הפעל את השרת:
 
    ```bash
-npm start
+   npm start
 
 
 
