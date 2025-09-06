@@ -674,7 +674,7 @@ const PrimeTechAcademy = () => {
       </div>
 
       <div style={styles.footer}>
-        <p style={styles.footerP1}>© 2024 PrimeTech Academy - כל הזכויות שמורות</p>
+        <p style={styles.footerP1}>© 2025 PrimeTech Academy - כל הזכויות שמורות</p>
         <p style={styles.footerP2}>הצלחה בלימודים! 🚀</p>
       </div>
     </div>
