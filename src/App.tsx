@@ -12,6 +12,7 @@ import CourseTopicsScreen from "./Screens/CourseTopicsScreen";
 import Header from "./Component/StudentHeader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProjectsScreen } from "./Screens/Projects";
+import PrimeTechLearningSystem from "./Screens/PrimeTechLearningSystem";
 
 const BASE_URL = "";
 const ACCESS_TOKEN = "user_access_token"; // OAuth access token
@@ -75,7 +76,8 @@ const ScreensRouts = () => {
     <BrowserRouter>
       <AppHeader />
       <Routes>
-        <Route index element={<Meetings />} />
+        {/* <Route index element={<Meetings />} /> */}
+        <Route path="/" element={<PrimeTechLearningSystem />}/>
         <Route path='/new' element={<ScheduleProccessScreen />} />
         <Route path='/projects' element={<ProjectsScreen />} />
         <Route path='/course/:courseName' element={<CourseTopicsScreen />} />
