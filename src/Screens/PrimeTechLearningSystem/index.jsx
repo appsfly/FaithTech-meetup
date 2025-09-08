@@ -99,7 +99,33 @@ const PrimeTechAcademy = () => {
           description: "מטרה: ללמוד איך להוסיף תמונות לדף אינטרנט עם <img>, להבין את תכונות src ו-alt, ולדעת על פורמטים נפוצים.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153527/vid-5_puqyck.mp4",
           thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
-        }      
+        }, {
+          id: 7,
+          title: " רשימות ב-HTML",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "04:47",
+          description: "מטרה: ללמוד איך לבנות רשימות ממוספרות (<ol>) ורשימות עם נקודות (<ul>), להכיר את <li>, ולהבין שימושים נפוצים.",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/ul-ol-li_hzstwp.mp4",
+          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+        },
+      {
+          id: 8,
+          title: "טבלאות ב-HTML",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "06:04",
+          description: "מטרה: להבין איך לבנות טבלאות בעזרת <table>, <tr>, <td>, <th>, ולהכיר שימושים נפוצים.",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/tables_wvfehu.mp4",
+          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+        },
+        {
+          id: 9,
+          title: "טפסים ב-HTML",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "12:39",
+          description: "מטרה: להבין איך ליצור טפסים בסיסיים לקבלת מידע מהמשתמש בעזרת <form>, <input>, <label>, <textarea>, וכפתור <button>.",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353540/forms_rtzt5g.mp4",
+          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+        }       
       ]
     },
     CSS:{
