@@ -72,7 +72,7 @@ const PrimeTechAcademy = () => {
           duration: "08:02",
           description: "מטרה: להבין את תגיות הכותרות <h1>-<h6> ותגית הפסקה <p>, נלמד איך הן יוצרות היררכיה נכונה בדף.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153552/vid-3_ruitko.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153552/vid-3_ruitko.mp4"
         },
         {
           id: 4,
@@ -81,7 +81,7 @@ const PrimeTechAcademy = () => {
           duration: "07:57",
           description: "מטרה: להבין איך להדגיש טקסטים ב-HTML בצורה נכונה, ההבדל בין <strong>/<em> לבין <b>/<i>, והקשר לנגישות.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153551/vid-4_hv2d3s.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153551/vid-4_hv2d3s.mp4"
         },
         {
           id: 5,
@@ -90,7 +90,7 @@ const PrimeTechAcademy = () => {
           duration: "09:41",
           description: "מטרה: נלמד איך ליצור קישורים חיצוניים, קישורים שנפתחים בלשונית חדשה, וקישורים פנימיים לדפים אחרים.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153527/vid-5_puqyck.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153527/vid-5_puqyck.mp4"
         } ,        {
           id: 6,
           title: "תמונות ב-HTML",
@@ -98,7 +98,7 @@ const PrimeTechAcademy = () => {
           duration: "08:23",
           description: "מטרה: ללמוד איך להוסיף תמונות לדף אינטרנט עם <img>, להבין את תכונות src ו-alt, ולדעת על פורמטים נפוצים.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153527/vid-5_puqyck.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757153527/vid-5_puqyck.mp4"
         }, {
           id: 7,
           title: " רשימות ב-HTML",
@@ -106,7 +106,7 @@ const PrimeTechAcademy = () => {
           duration: "04:47",
           description: "מטרה: ללמוד איך לבנות רשימות ממוספרות (<ol>) ורשימות עם נקודות (<ul>), להכיר את <li>, ולהבין שימושים נפוצים.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/ul-ol-li_hzstwp.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/ul-ol-li_hzstwp.mp4"
         },
       {
           id: 8,
@@ -115,7 +115,7 @@ const PrimeTechAcademy = () => {
           duration: "06:04",
           description: "מטרה: להבין איך לבנות טבלאות בעזרת <table>, <tr>, <td>, <th>, ולהכיר שימושים נפוצים.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/tables_wvfehu.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353535/tables_wvfehu.mp4"
         },
         {
           id: 9,
@@ -124,7 +124,7 @@ const PrimeTechAcademy = () => {
           duration: "12:39",
           description: "מטרה: להבין איך ליצור טפסים בסיסיים לקבלת מידע מהמשתמש בעזרת <form>, <input>, <label>, <textarea>, וכפתור <button>.",
           videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353540/forms_rtzt5g.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757353540/forms_rtzt5g.mp4"
         }       
       ]
     },
@@ -145,54 +145,54 @@ const PrimeTechAcademy = () => {
       ]
     },
     software: {
-      name: 'קורס פיתוח תוכנה',
+      name: 'קורס פיתוח תוכנה - צד לקוח',
       icon: '💻',
-      description: 'פיתוח Full Stack עם טכנולוגיות מתקדמות',
+      description: 'פיתוח React (facebook) עם טכנולוגיה מתקדמת',
       lessons: [
         {
           id: 1,
-          title: "יסודות פיתוח תוכנה",
-          instructor: "מרצה: יוסי כהן",
-          duration: "45:30",
-          description: "מבוא לתכנות ועקרונות פיתוח נכון",
-          videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Software+Dev"
+          title: "מבוא ל־React",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "03:20",
+          description: "מטרה: להבין מה זה React, למה היא פופולרית, ולהתקין סביבת עבודה ראשונה.",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757435553/react-intro_zfzm9w.mp4",
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757435553/react-intro_zfzm9w.mp4"
         },
         {
           id: 2,
-          title: "JavaScript ו-Node.js",
-          instructor: "מרצה: שרה לוי",
-          duration: "62:15",
-          description: "פיתוח צד שרת עם Node.js ו-Express",
-          videoUrl: "https://www.w3schools.com/html/movie.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/2563EB/white?text=JavaScript"
+          title: "React: התקנה + הרצה",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "05:25",
+          description: "המטרה: יצירה והתקנה של אפליקציית React",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757435553/react-install_qowotl.mp4",
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757435553/react-install_qowotl.mp4"
         },
         {
           id: 3,
-          title: "React ו-Frontend מתקדם",
-          instructor: "מרצה: עמית רוזן",
-          duration: "58:45",
-          description: "בניית ממשק משתמש מתקדם עם React ו-Redux",
-          videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/1D4ED8/white?text=React"
+          title: " הרצה של React",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "09:46",
+          description: "המטרה: הרצה של אפליקציה React ובנוסף לזה להבין את הקבצים החשובים",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757437015/react-3-part-1_vkubyg.mp4",
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757437015/react-3-part-1_vkubyg.mp4"
         },
         {
           id: 4,
-          title: "בסיסי נתונים ו-APIs",
-          instructor: "מרצה: דנה אברהם",
-          duration: "67:20",
-          description: "עבודה עם MongoDB ויצירת REST APIs מקצועיים",
-          videoUrl: "https://www.w3schools.com/html/movie.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/3B82F6/white?text=Database"
+          title: "Create Counter in React",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "03:51",
+          description: "המטרה: לחדד דגשים + יצירת Counter",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757437177/react-3-part-2_akqri4.mp4",
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757437177/react-3-part-2_akqri4.mp4"
         },
         {
           id: 5,
-          title: "DevOps ו-Deployment",
-          instructor: "מרצה: רון שמעון",
-          duration: "43:12",
-          description: "העלאה לענן, Docker וטכניקות DevOps",
-          videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-          thumbnail: "https://via.placeholder.com/300x169/2563EB/white?text=DevOps"
+          title: "Components in React",
+          instructor: "מרצה:  גדעון מנסה דאפאאה",
+          duration: "07:50",
+          description: "מטרה: להבין מה זו קומפוננטה, ליצור קובץ קומפוננטה חדש ולהשתמש בו.",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/v1757438010/react-4_vwztgk.mp4",
+          thumbnail: "https://res.cloudinary.com/dtracwymf/video/upload/v1757438010/react-4_vwztgk.mp4"
         }
       ]
     },
@@ -553,7 +553,8 @@ const PrimeTechAcademy = () => {
   };
 
   const selectCourse = (courseId) => {
-    if(courseId !== "HTML") { 
+    const allowedCourses = ['HTML', 'software']
+    if(!allowedCourses.includes(courseId)) { 
         alert("אינך מורשה לגשת לקורס שנבחר")
         return
     }
