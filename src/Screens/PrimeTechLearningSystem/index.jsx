@@ -16,10 +16,10 @@ const PrimeTechAcademy = () => {
         {
           id: 1,
           title: "מבוא לאבטחת מידע",
-          instructor: "מרצה: אלון שמיר",
-          duration: "42:30",
+          instructor: "מרצה: יובל ",
+          duration: "2:31",
           description: "יסודות אבטחת מידע והבנת איומים ברשת",
-          videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+          videoUrl: "https://res.cloudinary.com/dtracwymf/video/upload/download-kali-linux-3_wmewpq.mp4",
           thumbnail: "https://via.placeholder.com/300x169/DC2626/white?text=Cyber+Security"
         },
         {
@@ -553,7 +553,7 @@ const PrimeTechAcademy = () => {
   };
 
   const selectCourse = (courseId) => {
-    const allowedCourses = ['HTML', 'software']
+    const allowedCourses = ['HTML', 'software', 'cyber']; // Example allowed courses
     if(!allowedCourses.includes(courseId)) { 
         alert("אינך מורשה לגשת לקורס שנבחר")
         return
