@@ -28,7 +28,7 @@ const PrimeTechAcademy = () => {
           instructor: "מרצה: רותי כהן",
           duration: "55:15",
           description: "הבנה מעמיקה של פרוטוקולי רשת ונקודות תורפה",
-          videoUrl: "https://www.w3schools.com/html/movie.mp4",
+          videoUrl: "",
           thumbnail: "https://via.placeholder.com/300x169/B91C1C/white?text=Network+Security"
         },
         {
@@ -37,7 +37,7 @@ const PrimeTechAcademy = () => {
           instructor: "מרצה: דני לוי",
           duration: "48:45",
           description: "טכניקות בסיסיות לבדיקות חדירה ומיפוי מערכות",
-          videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+          videoUrl: "",
           thumbnail: "https://via.placeholder.com/300x169/991B1B/white?text=Pen+Testing"
         },
         {
@@ -46,7 +46,7 @@ const PrimeTechAcademy = () => {
           instructor: "מרצה: מיכל דוד",
           duration: "52:20",
           description: "הגנה על Windows ו-Linux מפני איומים",
-          videoUrl: "https://www.w3schools.com/html/movie.mp4",
+          videoUrl: "",
           thumbnail: "https://via.placeholder.com/300x169/DC2626/white?text=OS+Security"
         }
       ]
